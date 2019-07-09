@@ -1,0 +1,35 @@
+#![doc(html_no_source)]
+
+pub mod adt_example;
+pub mod anamorphism_example;
+pub mod applicative_example;
+pub mod arity_example;
+pub mod catamorphism_example;
+pub mod closure_example;
+pub mod comonad_example;
+pub mod continuation;
+pub mod contracts;
+pub mod currying_example;
+pub mod endomorphism_example;
+pub mod foldable_example;
+pub mod function_composition_example;
+pub mod functor_example;
+pub mod hof_example;
+pub mod homomorphism_example;
+pub mod idempotent;
+pub mod isomorphism_example;
+pub mod lambda_example;
+pub mod lens_example;
+pub mod monad_example;
+pub mod monoid_example;
+pub mod option_example;
+pub mod partial_application_example;
+pub mod pointed_functor_example;
+pub mod predicate_example;
+pub mod purity_example;
+pub mod referential_transparency_example;
+pub mod semigroup_example;
+pub mod setoid_example;
+pub mod side_effects_example;
+pub mod type_signature_example;
+pub mod value;
