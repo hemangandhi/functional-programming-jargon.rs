@@ -10,5 +10,5 @@ steps:
     displayName: Set Nightly
   - script: cargo build --all
     displayName: Cargo build
-  - script: cargo test --all
-    displayName: Cargo test
+  - script: cargo doc --document-private-items
+    displayName: Cargo doc
