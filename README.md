@@ -15,7 +15,7 @@ Also please be mindful that the project sometimes utilise FP related crates that
 a specific typeclass or data type that is appropriate to give an explanation. Many of them are experimental and
 are not suitable for production usage.
 
-__Table of Contents__
+## Table of Contents
 <!-- RM(noparent,notop) -->
 
 
