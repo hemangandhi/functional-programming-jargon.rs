@@ -8,7 +8,7 @@ Functional programming (FP) provides many advantages, and its popularity has bee
 However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary,
 we hope to make learning FP easier.
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land) 
+Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 and Rust programming language to give code examples.
 
 Also please be mindful that the project sometimes utilise FP related crates that are unfinished but contains
@@ -125,11 +125,11 @@ add_to_five(3); // => 8
 Closures are commonly used in event handlers so that they still have access to variables defined in their parents when they
 are eventually called.
 
-__Further reading__
+### Further reading
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
 * [How do JavaScript Closures Work?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
-## Partial Application 
+## Partial Application
 
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
 
@@ -154,7 +154,7 @@ assert_eq!(
 Partial application helps create simpler functions from more complex ones by baking in data when you have it.
 Curried functions are automatically partially applied.
 
-__Further reading__
+### Further reading
 * [Partial Application in Haskell](https://wiki.haskell.org/Partial_application)
 
 
@@ -174,7 +174,7 @@ let add5 = add(5);
 add5(10); // 15
 ```
 
-__Further reading__
+### Further reading
 * [Currying in Rust](https://hashnode.com/post/currying-in-rust-cjpfb0i2z00cm56s2aideuo4z)
 
 ## Auto Currying
@@ -427,7 +427,7 @@ To be a valid category 3 rules must be met:
 
 Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
 
-__Further reading__
+### Further reading
 
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 
@@ -473,7 +473,7 @@ Variance in Rust is used during the type checking against type and lifetime para
 
 ## Higher Kinded Type (HKT)
 
-Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a 
+Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a
 type with a "hole" in it, so you can declare a type signature such as `trait Functor<F<A>>`.
 
 Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
@@ -505,13 +505,13 @@ Higher Kinded Type is crucial for functional programming in general.
 An object that implements a map function which,
 while running over each value in the object to produce a new functor of the same type, adheres to two rules:
 
-__Preserves identity__
+### Preserves identity
 
 ```
 object.map(x => x) ≍ object
 ```
 
-__Composable__
+### Composable
 
 ```
 object.map(compose(f, g)) ≍ object.map(g).map(f)
@@ -584,7 +584,7 @@ assert_eq!(pointed_functor, Maybe::Just(1));
 
 ## Lifting
 
-Lifting in functional programming typically means to lift a function into a context (a Functor or Monad). 
+Lifting in functional programming typically means to lift a function into a context (a Functor or Monad).
 For example, give a function `a -> b` and lift it into a `List` then the signature would
 look like `List[a] -> List[b]`.
 
@@ -615,7 +615,7 @@ An "identity" value must also exist that when combined with a value doesn't chan
 The identity value for addition is `0`.
 
 ```rust
-1 + 0 
+1 + 0
 // i32: 1
 ```
 
@@ -695,7 +695,7 @@ fn monad_example() {
 
 ## Comonad
 
-An object that has `extract` and `extend` functions. 
+An object that has `extract` and `extend` functions.
 
 ```rust
 trait Extend<A, B>: Functor<A, B> + Sized {
@@ -742,7 +742,7 @@ Extend runs a function on the Comonad.
 Some(1).extend(|co| co.extract() + 1); // Some(2)
 ```
 
-## Applicative 
+## Applicative
 
 An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another
 object of the same type. Given a pure program `g: (b: A) -> B`, we must lift it to `g: (fb: F<A>) -> F<B>`. In order to achieve
@@ -814,7 +814,7 @@ assert_eq!(x, Some(2));
 
 A transformation function.
 
-### Endomorphism
+###  Endomorphism
 
 A function where the input type is same as the output.
 
@@ -826,7 +826,7 @@ let uppercase = |x: &str| x.to_uppercase();
 let decrement = |x: i32| x - 1;
 ```
 
-### Isomorphism
+###  Isomorphism
 
 A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
 
@@ -851,7 +851,7 @@ assert_eq!(
 ); // passes
 ```
 
-### Homomorphism
+###  Homomorphism
 
 A homomorphism is just a structure preserving map.
 In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
@@ -864,7 +864,7 @@ assert_eq!(
 ); // passes
 ```
 
-### Catamorphism
+###  Catamorphism
 
 A `reduceRight` function that applies a function against an accumulator and each value of the array (from right-to-left)
 to reduce it to a single value.
@@ -875,7 +875,7 @@ let sum = |xs: Vec<i32>| xs.iter().fold(0, |mut sum, &val| { sum += val; sum });
 assert_eq!(sum(vec![1, 2, 3, 4, 5]), 15);
 ```
 
-### Anamorphism
+###  Anamorphism
 
 An `unfold` function. An `unfold` is the opposite of `fold` (`reduce`). It generates a list from a single value.
 
@@ -900,11 +900,11 @@ assert_eq!(
 );
 ```
 
-### Hylomorphism
+###  Hylomorphism
 
 The combination of anamorphism and catamorphism.
 
-### Apomorphism
+###  Apomorphism
 It's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism.
 Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated,
 apomorphism lets you unfold with the potential to return early.
@@ -1120,7 +1120,7 @@ fn map<A, B>(f: &Fn(A) -> B) -> impl Fn(A) -> B + '_ {
 
 A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type) and [product](#product-type).
 
-### Sum Type
+###  Sum Type
 
 A Sum type is the combination of two types together into another one.
 It is called sum because the number of possible values in the result type is the sum of the input types.
@@ -1136,7 +1136,7 @@ enum WeakLogicValues {
 // WeakLogicValues = bool + otherbool + anotherbool
 ```
 
-### Product Type
+###  Product Type
 
 A product type combines types together in a way you're probably more familiar with:
 
@@ -1219,5 +1219,5 @@ match price {
 ## My thought on this project
 
 Please be mindful that the project does not fully cover every single definitions with code examples since it does not worth
-investing too much time in a glossary project. I have put extra effort in adding complementary external references that 
+investing too much time in a glossary project. I have put extra effort in adding complementary external references that
 you can check out for further study.
