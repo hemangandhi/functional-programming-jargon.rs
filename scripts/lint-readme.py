@@ -40,6 +40,18 @@ class MarkdownHeadings:
     def to_link(self):
         return self.heading.lower().replace(' ', '-')
 
+def guess_rs_file_of_heading(heading, rs_file_base):
+    def heading_to_path(heading_str, replace_space='-'):
+        return heading_str.strip().lower().replace(' ', replace_space)
+
+    path_guess = ''
+    if heading.level > 2:
+        tmp = heading.parent
+        while tmp is not None:
+            path_guess = heading_to_path(tmp.heading) + '/' + path_guess
+    path_guess = rs_file_base + '/' + path_guess + heading_to_path(heading.heading, '_') + '_example.rs'
+
 def main(path):
     with open(path) as readme:
+        tree = MarkdownHeadings.into_heading_tree(readme)
 
