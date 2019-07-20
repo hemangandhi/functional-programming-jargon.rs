@@ -1,15 +1,6 @@
 
 # Migrating README
 
-* [Higher Kinded Type](README.md#higher-kinded-type-hkt) <- should be in own file, so `functor.rs` will have to be fixed.
-* [Functor](README.md#functor)
-* [Pointed Functor](README.md#pointed-functor)
-* [Lifting](README.md#lifting)
-* [Equational Reasoning](README.md#equational-reasoning)
-* [Monoid](README.md#monoid)
-* [Monad](README.md#monad)
-* [Comonad](README.md#comonad)
-* [Applicative](README.md#applicative)
 * [Morphism](README.md#morphism)
   * [Endomorphism](README.md#endomorphism)
   * [Isomorphism](README.md#isomorphism)
@@ -33,6 +24,10 @@ expectations about code samples).
 
 There'll have to be some effort expended on actually getting the
 code to still compile with import references changing.
+
+## Smaller re-structuring
+
+- Make `monoid.rs` a trait.
 
 # Scripting/Linting
 

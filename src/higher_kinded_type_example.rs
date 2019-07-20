@@ -1,5 +1,11 @@
 ///Rust does not support Higher Kinded Types [yet](https://github.com/rust-lang/rust/issues/8922). First of all, HKT is a
 ///type with a "hole" in it, so you can declare a type signature such as `trait Functor<F<A>>`.
+///Higher kinded types are crucial for functional programming in general.
+///
+///**further reading**
+///
+///- https://gist.github.com/CMCDragonkai/a5638f50c87d49f815b8
+///- https://www.youtube.com/watch?v=erm0mbpnlhc
 ///
 ///Although Rust lacks in a native support for HKT, we always have a walk around called [Lightweight Higher Kinded Type](https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf)
 ///

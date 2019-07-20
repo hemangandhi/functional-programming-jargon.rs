@@ -1,6 +1,7 @@
 use crate::functor_example::Functor;
 use crate::higher_kinded_type_example::HKT;
 
+///Extend runs a function on the Comonad.
 trait Extend<A, B>: Functor<A, B> + Sized {
     fn extend<W>(self, f: W) -> <Self as HKT<A, B>>::Target
     where
@@ -16,6 +17,7 @@ impl<A, B> Extend<A, B> for Option<A> {
     }
 }
 
+///Extract takes a value out of a functor.
 trait Extract<A> {
     fn extract(self) -> A;
 }
@@ -26,6 +28,7 @@ impl<A> Extract<A> for Option<A> {
     }
 }
 
+///An object that has `extract` and `extend` functions.
 trait Comonad<A, B>: Extend<A, B> + Extract<A> {}
 
 #[test]
