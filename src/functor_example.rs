@@ -1,17 +1,9 @@
-pub trait HKT<A, B> {
-    type URI;
-    type Target;
-}
+use crate::higher_kinded_type_example::HKT;
 
 pub trait Functor<A, B>: HKT<A, B> {
     fn fmap<F>(self, f: F) -> <Self as HKT<A, B>>::Target
     where
         F: FnOnce(A) -> B;
-}
-
-impl<A, B> HKT<A, B> for Option<A> {
-    type URI = Self;
-    type Target = Option<B>;
 }
 
 impl<A, B> Functor<A, B> for Option<A> {

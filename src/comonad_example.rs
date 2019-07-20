@@ -1,4 +1,5 @@
-use crate::functor_example::{Functor, HKT};
+use crate::functor_example::Functor;
+use crate::higher_kinded_type_example::HKT;
 
 trait Extend<A, B>: Functor<A, B> + Sized {
     fn extend<W>(self, f: W) -> <Self as HKT<A, B>>::Target

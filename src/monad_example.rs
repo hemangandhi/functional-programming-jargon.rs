@@ -1,5 +1,5 @@
 use crate::applicative_example::{Applicative, Pure};
-use crate::functor_example::HKT;
+use crate::higher_kinded_type_example::HKT;
 
 pub trait Chain<A, B>: HKT<A, B> {
     fn chain<F>(self, f: F) -> <Self as HKT<A, B>>::Target

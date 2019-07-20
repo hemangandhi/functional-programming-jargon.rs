@@ -1,4 +1,5 @@
-use crate::functor_example::{Functor, HKT};
+use crate::functor_example::Functor;
+use crate::higher_kinded_type_example::HKT;
 
 // HKT 3
 pub trait HKT3<A, B, C> {
