@@ -1,4 +1,5 @@
-use std::char::from_u32;
+use crate::hkt::HKT;
+use std::iter::FromIterator;
 
 pub trait Empty {
     fn empty() -> Self;
@@ -14,7 +15,7 @@ macro_rules! impl_empty_i {
     )*)
 }
 
-impl_empty_i! { usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128 }
+//impl_empty_i! { usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128 }
 
 macro_rules! impl_empty_f {
     ($($t:ty)*) => ($(
@@ -26,10 +27,15 @@ macro_rules! impl_empty_f {
     )*)
 }
 
-impl_empty_f! { f32 f64 }
+//impl_empty_f! { f32 f64 }
 
-impl Empty for String {
+impl<T> Empty for T
+where
+    // Big-time hack: <T as HKT<T>>::Current yanks out a generic
+    // argument and T: HKT<T> is a reasonable bound for any HKT.
+    T: HKT<T> + FromIterator<<T as HKT<T>>::Current>,
+{
     fn empty() -> Self {
-        "".into()
+        std::iter::empty()
     }
 }

@@ -17,10 +17,11 @@ macro_rules! derive_hkt {
     };
 }
 
-impl<A, B, I, F, F2, I2> HKT<B> for F
+impl<A, B, I, F, I2> HKT<B> for F
 where
     F: IntoIterator<Item = A, IntoIter = I>,
-    F2: IntoIterator<Item = B, IntoIter = I2>,
+    I: IntoIterator<Item = B, IntoIter = I2> + Iterator<Item = A>,
+    I2: Iterator<Item = B>,
 {
     type Current = A;
     type Target = I2;
