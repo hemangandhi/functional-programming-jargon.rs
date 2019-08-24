@@ -15,25 +15,13 @@ pub trait Foldable<B>: HKT<B> + Sized {
         F: Fn(&<Self as HKT<B>>::Current, B) -> B;
 }
 
-pub trait FoldableM<C, F>: Sized
-where
-    Self: Monoid,
-    C: Foldable<Self>,
-    F: Fn(&<C as HKT<Self>>::Current) -> Self,
-{
-    fn fold_map(container: C, mapper: F) -> Self {
-        container.reduce(Self::empty(), |acc, curr| acc.combine(mapper(curr)))
-    }
-}
-
 // Biggest hardship with trying to put this into the above:
 // we cannot have B constrained to be a Monoid, so having
 // a default implementation becomes impossible. That said,
 // having this as a separate function might make more sense
 // (in particular, it might be easier to implement Foldable for
-// rust containers as above and not have to worry about our Monoid
-// until "later" -- when this function is handy).
-/* pub fn fold_map<M, C, F>(container: C, mapper: F) -> M
+// rust containers as above and not have to worry about our Monoid).
+pub fn fold_map<M, C, F>(container: C, mapper: F) -> M
 where
     M: Monoid,
     C: Foldable<M>,
@@ -41,7 +29,6 @@ where
 {
     container.reduce(M::empty(), |acc, curr| acc.combine(mapper(curr)))
 }
-*/
 
 impl<A, B> Foldable<B> for Vec<A> {
     fn reduce<F>(self, b: B, fa: F) -> B

@@ -17,19 +17,29 @@ macro_rules! derive_hkt {
     };
 }
 
-derive_hkt!(Option);
-derive_hkt!(Vec);
+impl<A, B, I, F, F2, I2> HKT<B> for F
+where
+    F: IntoIterator<Item = A, IntoIter = I>,
+    F2: IntoIterator<Item = B, IntoIter = I2>,
+{
+    type Current = A;
+    type Target = I2;
+}
 
-pub trait HKT3<U1, U2> {
+pub trait HKT2<U1, U2> {
     type Current1;
     type Current2;
     type Target;
 }
 
-/*
-macro_rules! derive_hkt3 {
+impl<U1, U2, T1, T2, T3> HKT<U2> for HKT2<U1, U2, Current1 = T1, Current2 = T2, Target = T3> {
+    type Current = <Self as HKT2<U1, U2>>::Current1; // Technically T1, but this emphasizes the intent
+    type Target = <Self as HKT2<U1, U2>>::Target; // Technically T3, but this emphasizes the intent
+}
+
+macro_rules! derive_hkt2 {
     ($t:ident) => {
-        impl<T1, T2, U1, U2> HKT3<U1, U2> for $t<T1, T2> {
+        impl<T1, T2, U1, U2> HKT2<U1, U2> for $t<T1, T2> {
             // The currently contained types
             type Current1 = T1;
             type Current2 = T2;
@@ -39,5 +49,4 @@ macro_rules! derive_hkt3 {
     };
 }
 
-derive_hkt3!(HashMap);
-*/
+derive_hkt2!(HashMap);
